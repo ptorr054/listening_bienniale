@@ -1,0 +1,343 @@
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom, #f5f5f5, #dbe4e4);
+  font-family: 'FoundryGridnik', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.site-title {
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem;
+  font-size: 1.8rem;
+  letter-spacing: 0.03em;
+  color: #222;
+  z-index: 10;
+  line-height: 1.4;
+}
+
+.flying-container {
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.label-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px; /* expands clickable area */
+  cursor: pointer;
+}
+
+.flying-object {
+  width: 200px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.label-wrapper:hover .flying-object {
+  transform: scale(1.1);
+}
+
+.footnote {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  color: #111;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.sub-label {
+  display: block;
+  font-size: 0.7rem;
+  color: #555;
+  margin-top: 2px;
+  letter-spacing: 0.03em;
+}
+
+.label-wrapper:hover .footnote {
+  opacity: 1;
+}
+
+.path1 { animation: move1 150s linear infinite; }
+.path2 { animation: move2 170s linear infinite; }
+.path3 { animation: move3 120s linear infinite; }
+.path4 { animation: move4 140s linear infinite; }
+.path5 { animation: move5 160s linear infinite; }
+.path6 { animation: move6 180s linear infinite; }
+
+
+@keyframes move1 {
+  0%   { top: 10%; left: 10%; }
+  25%  { top: 100%; left: 80%; }
+  50%  { top: 80%; left: 100%; }
+  75%  { top: 30%; left: 20%; }
+  100% { top: 2%; left: 5%; }
+}
+
+@keyframes move2 {
+  0% { top: 80%; left: 20%; }
+  25% { top: 50%; left: 90%; }
+  50% { top: 20%; left: 60%; }
+  75% { top: 50%; left: 20%; }
+  100% { top: 70%; left: 20%; }
+}
+
+@keyframes move3 {
+  0% { top: 10%; left: 80%; }
+  25% { top: 30%; left: 20%; }
+  50% { top: 70%; left: 40%; }
+  75% { top: 30%; left: 80%; }
+  100% { top: 10%; left: 80%; }
+}
+
+@keyframes move4 {
+  0% { top: 60%; left: 70%; }
+  25% { top: 40%; left: 30%; }
+  50% { top: 20%; left: 80%; }
+  75% { top: 50%; left: 60%; }
+  100% { top: 60%; left: 70%; }
+}
+
+@keyframes move5 {
+  0% { top: 30%; left: 50%; }
+  25% { top: 70%; left: 10%; }
+  50% { top: 40%; left: 90%; }
+  75% { top: 20%; left: 20%; }
+  100% { top: 30%; left: 50%; }
+}
+
+@keyframes move6 {
+  0% { top: 20%; left: 30%; }
+  25% { top: 80%; left: 50%; }
+  50% { top: 40%; left: 90%; }
+  75% { top: 10%; left: 60%; }
+  100% { top: 20%; left: 30%; }
+}
+
+.page-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: opacity 1.2s ease;
+  background: transparent;
+  pointer-events: none;
+  opacity: 0;
+}
+.page-layer.visible {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 5;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grounds-path1 { animation: drift1 600s linear infinite; }
+.grounds-path2 { animation: drift2 720s linear infinite; }
+
+@keyframes drift1 {
+  0%   { top: 10%; left: 15%; }
+  100% { top: 12%; left: 18%; }
+}
+
+@keyframes drift2 {
+  0%   { top: 60%; left: 70%; }
+  100% { top: 63%; left: 66%; }
+}
+
+.text-marker {
+  position: absolute;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #111;
+  cursor: pointer;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 10;
+}
+
+.text-marker:hover {
+  transform: scale(1.1) translate(-50%, -50%);
+  color: #333;
+}
+
+/* Make homepage visible but transparent in background */
+#homepage.hidden {
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@font-face {
+  font-family: 'FoundryGridnik';
+  src: url('../assets/fonts/FoundryGridnik Medium.otf') format('opentype');
+  font-weight: 400;
+  font-style: bold;
+}
+
+.artist-columns {
+  display: flex;
+  justify-content: space-around;
+  padding: 5rem 2rem;
+  font-family: 'FoundryGridnik', sans-serif;
+  font-weight: 300;
+  font-size: 0.95rem;
+  color: #222;
+  flex-wrap: wrap;
+  pointer-events: auto; /* ensures internal clicks register */
+}
+
+#dreamers {
+  pointer-events: auto; /* ensures outer container catches clicks */
+}
+
+.artist-columns .column {
+  flex: 1;
+  max-width: 300px;
+  margin: 0 1rem;
+}
+
+.artist {
+  margin-bottom: 1.2rem;
+  line-height: 1.4;
+}
+
+.artist {
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.artist:hover {
+  transform: scale(1.05);
+  color: #444;
+}
+
+.artist-bio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.96);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  /* 👇 Add these two */
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+
+.artist-bio.hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bio-content {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  flex: 1 0 auto;
+}
+
+.bio-content p {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+
+.journeys-markers {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.journey-marker {
+  position: absolute;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #111;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.journey-marker:not([data-city="newdelhi"]) {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.program-box {
+  position: absolute;
+  top: 12%;
+  left: 15%;
+  background: rgba(255,255,255,0.95);
+  padding: 1.5rem;
+  max-width: 300px;
+  font-size: 1rem;
+  line-height: 1.5;
+  z-index: 20;
+  border: 1px solid #ccc;
+}
+
+#grounds.page-layer {
+  z-index: 4;
+}
+#journeys.page-layer {
+  z-index: 5;
+}
+
+#journeys {
+  z-index: 5;
+}
+
+.calendar-grounds-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.marker {
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #111;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  opacity: 0.2;
+}
